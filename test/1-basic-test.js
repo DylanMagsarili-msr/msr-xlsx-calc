@@ -1389,9 +1389,15 @@ describe('XLSX_CALC', function() {
 
             workbook.Sheets.Sheet1.C1 = { f: "INDEX(A2:B3, 2, 2)" };
             workbook.Sheets.Sheet1.C2 = { f: "INDEX(A2:B3, 2, 1)" };
+            // If there is only 1 row, the argument should index the columns
+            workbook.Sheets.Sheet1.D1 = { f: "INDEX(A2:B2, 2)" };
+            // If there is only 1 column, the argument should index the rows
+            workbook.Sheets.Sheet1.D2 = { f: "INDEX(A2:A3, 2)" };
             XLSX_CALC(workbook);
             assert.equal(workbook.Sheets.Sheet1.C1.v, "Pears");
             assert.equal(workbook.Sheets.Sheet1.C2.v, "Bananas");
+            assert.equal(workbook.Sheets.Sheet1.D1.v, "Lemons");
+            assert.equal(workbook.Sheets.Sheet1.D2.v, "Bananas");
         });
     });
 

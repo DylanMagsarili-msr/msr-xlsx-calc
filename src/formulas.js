@@ -360,6 +360,14 @@ function index(matrix, row_num, column_num) {
         } else {
             return matrix[row_num];
         }
+    } else if (matrix.length === 1) {
+        // If there is only 1 row, the first argument (row_num) should index the column instead
+        var row = matrix[0];
+        if (Array.isArray(row)) {
+            if (row_num <= row.length) {
+                return row[row_num - 1];
+            }
+        }
     }
     throw Error('#REF!');
 }
